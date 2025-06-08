@@ -1,0 +1,26 @@
+{
+  "name": "express-validatorr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smsarfroz/express-validatorr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smsarfroz/express-validatorr/issues"
+  },
+  "homepage": "https://github.com/smsarfroz/express-validatorr#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1"
+  },
+  "type": "module"
+}
