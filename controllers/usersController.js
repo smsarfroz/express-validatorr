@@ -16,7 +16,6 @@ const validateUser = [
 ];
 
 
-
 const usersController = {
     usersListGet: (req, res) => {
         res.render("index", {
@@ -31,11 +30,6 @@ const usersController = {
         });
     },
 
-    usersCreatePost: (req, res) => {
-        const { firstName, lastName } = req.body;
-        usersStorage.addUser({ firstName, lastName });
-        res.redirect("/");
-    },
     // We can pass an entire array of middleware validations to our controller.
     usersCreatePost: [
         validateUser,
@@ -47,8 +41,8 @@ const usersController = {
                     errors: errors.array(),
                 });
             }
-            const { firstName, lastName } = req.body;
-            usersStorage.addUser({ firstName, lastName });
+            const { firstName, lastName, email, age, bio } = req.body;
+            usersStorage.addUser({ firstName, lastName, email, age, bio });
             res.redirect("/");
         }
     ],
@@ -72,8 +66,8 @@ const usersController = {
                     errors: errors.array(),
                 });
             }
-            const { firstName, lastName } = req.body;
-            usersStorage.updateUser(req.params.id, { firstName, lastName });
+            const { firstName, lastName, email, age, bio } = req.body;
+            usersStorage.updateUser(req.params.id, { firstName, lastName, email, age, bio });
             res.redirect("/");
         }
     ],
