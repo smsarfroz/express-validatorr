@@ -5,6 +5,7 @@ import { body, validationResult } from "express-validator";
 
 const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 10 characters.";
+const rangeErr = "must be between 18 and 120 inclusive.";
 
 const validateUser = [
     body("firstName").trim()
@@ -13,6 +14,18 @@ const validateUser = [
     body("lastName").trim()
         .isAlpha().withMessage(`Last name ${alphaErr}`)
         .isLength({ min: 1, max: 10 }).withMessage(`Last name ${lengthErr}`),
+    body("email")
+        .notEmpty().withMessage(`email is required`)
+        .trim()
+        .isEmail().withMessage(`invalid email.`),
+    body("age")
+        .optional()
+        .trim()
+        .isInt({ min: 18, max: 120 }).withMessage(`Age ${rangeErr}`),
+    body("bio")
+        .optional()
+        .trim()
+        .isLength({ max: 200 }).withMessage(`must be less than or equal to 200 characters`)
 ];
 
 
