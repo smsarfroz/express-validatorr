@@ -1,7 +1,7 @@
 // controllers/usersController.js
 import usersStorage from '../storages/usersStorage.js';
 // This just shows the new stuff we're adding to the existing contents
-import { body, validationResult } from "express-validator";
+import { body, query, validationResult } from "express-validator";
 
 const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 10 characters.";
@@ -31,6 +31,7 @@ const validateUser = [
 
 const usersController = {
     usersListGet: (req, res) => {
+        console.log(usersStorage.getUsers());  
         res.render("index", {
             title: "User list",
             users: usersStorage.getUsers(),
@@ -38,6 +39,7 @@ const usersController = {
     },
 
     usersCreateGet: (req, res) => {
+        console.log(usersStorage.getUsers()); 
         res.render("createUser", {
             title: "Create user",
         });
@@ -89,6 +91,22 @@ const usersController = {
     usersDeletePost: (req, res) => {
         usersStorage.deleteUser(req.params.id);
         res.redirect("/");
+    },
+
+    usersSearchGet: (req, res) => {
+        console.log(req.query, usersStorage.getUsers());
+        const allUsers = usersStorage.getUsers();
+        const searchQuery = req.query.name;
+
+        const matchedUsers = allUsers.filter(user => {
+            return user.firstName.includes(searchQuery);
+        });
+        // console.log(searchQuery);
+        // console.log(allUsers);
+        // console.log(matchedUsers);
+        res.render("search", {
+            users: matchedUsers,
+        });
     }
 
 }
